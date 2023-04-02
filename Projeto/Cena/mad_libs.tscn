@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://blut5t8c2gicn"]
+
+[ext_resource type="Script" path="res://MadLibs.gd" id="1_1mnka"]
+[ext_resource type="Texture2D" uid="uid://der0uur5x6ten" path="res://gfx/blackboard.jpg" id="2_f0iym"]
+[ext_resource type="FontFile" uid="uid://s0hrpctiqpba" path="res://gfx/Feltpen.ttf" id="3_k71mo"]
+[ext_resource type="Texture2D" uid="uid://cn2c0m8o6pkfp" path="res://gfx/blue_button11.png" id="4_1if30"]
+[ext_resource type="Texture2D" uid="uid://cbmdvfhsdcjde" path="res://gfx/blue_button12.png" id="5_qb6np"]
+[ext_resource type="Script" path="res://Cena/Historia.gd" id="6_qbpv4"]
+
+[sub_resource type="FontVariation" id="FontVariation_08g3u"]
+base_font = ExtResource("3_k71mo")
+
+[node name="MadLibs" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1mnka")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_f0iym")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Texto" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 550)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_08g3u")
+theme_override_font_sizes/font_size = 40
+text = "Bem-Vindo(a) ao meu jogo de historias fantasticas! "
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="InputJogador" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_k71mo")
+theme_override_font_sizes/font_size = 30
+
+[node name="Botao" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_1if30")
+texture_pressed = ExtResource("5_qb6np")
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_k71mo")
+theme_override_font_sizes/font_size = 30
+text = "Ok
+"
+
+[node name="Historias" type="Node" parent="."]
+
+[node name="Historia0" type="Node" parent="Historias"]
+script = ExtResource("6_qbpv4")
+perguntas = PackedStringArray("um substantivo", "Um adjetivo", "Um inteiro positivo", "outro inteiro positivo")
+texto = "O filme %s %s e muito bom, apesar de ter %s horas de duração. Tive que ir ao banheiro %s vezes"
+
+[node name="Historia1" type="Node" parent="Historias"]
+script = ExtResource("6_qbpv4")
+perguntas = PackedStringArray("um nome", "Um lugar (plural)", "Um adjetivo", "outro adjetivo")
+texto = "O perfume Arome de %s vendido principalmente em %s é muito %s e %s"
+
+[node name="Historia2" type="Node" parent="Historias"]
+script = ExtResource("6_qbpv4")
+perguntas = PackedStringArray("um evento(feminino)", "Um nome", "Um clima")
+texto = "A %s foi muito movimentada, até %s apareceu! E olhe que o dia estava %s."
+
+[node name="Historia3" type="Node" parent="Historias"]
+script = ExtResource("6_qbpv4")
+perguntas = PackedStringArray("um nome", "Uma comida", "Um adjetivo", "um verbo (passado)")
+texto = "Em um belo dia, %s viajou para as grutas de %s, apenas para descobrir que seu cheiro era %s. Sem mais o que fazer, %s."
+
+[node name="Historia4" type="Node" parent="Historias"]
+script = ExtResource("6_qbpv4")
+perguntas = PackedStringArray("um nome", "outro nome", "mais um nome", "um adjetivo", "outro adjetivo", "mais um adjetivo")
+texto = "Era uma vez tres porquinhos, %s, %s e %s. Cada um tinha uma caracteristica: %s, %s e %s"
+
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainer/InputJogador" to="." method="_on_input_jogador_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Botao" to="." method="_on_botao_pressed"]
